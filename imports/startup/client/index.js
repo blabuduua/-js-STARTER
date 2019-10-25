@@ -44,14 +44,14 @@ const link = split(
 );
 
 // Инициализация Клиента
-const apolloClient = new ApolloClient({
+const client = new ApolloClient({
     link,
     cache: new InMemoryCache(),
 });
 
 // Обёртка пролижения
 const ApolloApp = () => (
-    <ApolloProvider client={apolloClient}>
+    <ApolloProvider client={client}>
         <App />
     </ApolloProvider>
 );

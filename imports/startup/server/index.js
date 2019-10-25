@@ -2,19 +2,38 @@ import { ApolloServer, gql } from 'apollo-server-express'
 import { WebApp } from 'meteor/webapp'
 import { getUser } from 'meteor/apollo'
 import merge from 'lodash/merge'
+import UsersSchema from '../../api/users/Users.graphql'
 
 // СХЕМЫ (Миграции)
-const typeDefs = `
+const TestsSchema = `
   type Query {
     hi: String
+    users: [Users]
   }
 `;
+
+const typeDefs = [
+    TestsSchema,
+    UsersSchema
+];
 
 // КОНТРОЛЛЕРЫ
 const resolvers = {
   Query: {
     hi() {
       return 'Hello World!'
+    },
+    users() {
+      return [
+        {
+          _id: '123',
+          name: 'Matrix'
+        },
+        {
+          _id: '1234',
+          name: 'Matrix2'
+        }
+      ]
     }
   }
 };

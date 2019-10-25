@@ -21,5 +21,31 @@ const resolvers = {
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context: async ({ req, connection }) => {
+        if (connection) {
+          // check connection for metadata
+          return connection.context;
+        } else {
+          // check from req
+          const token = req.headers.authorization || "";
+
+          return { user: await getUser(token) };
+        }
+    },
+  subscriptions: {
+        path: "/subscriptions",
+        onConnect: async (connectionParams, webSocket, context) => {
+            console.log(`Subscription client connected using Apollo server's built-in SubscriptionServer.`)
+        },
+        onDisconnect: async (webSocket, context) => {
+            console.log(`Subscription client disconnected.`)
+        }
+    }
 });
+
+server.applyMiddleware({
+    app: WebApp.connectHandlers,
+});
+
+server.installSubscriptionHandlers(WebApp.httpServer);

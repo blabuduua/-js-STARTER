@@ -41,6 +41,7 @@ const App = () => {
       // Authenticate
       <LoginForm />
       <RegisterForm />
+      <button onClick={ () =>  Meteor.logout() }>Logout</button>
     </div>
   )
 }

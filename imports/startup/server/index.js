@@ -4,7 +4,9 @@ import { getUser } from 'meteor/apollo'
 import merge from 'lodash/merge'
 
 import UsersSchema from '../../api/users/Users.graphql'
+import UserSchema from '../../api/users/User.graphql'
 import UsersResolvers from '../../api/users/resolvers'
+import UserResolvers from '../../api/users/userResolvers'
 
 // Update 1
 
@@ -13,12 +15,14 @@ const TestsSchema = `
   type Query {
     hi: String
     users: [Users]
+    user: User
   }
 `;
 
 const typeDefs = [
     TestsSchema,
-    UsersSchema
+    UsersSchema,
+    UserSchema
 ];
 
 // КОНТРОЛЛЕРЫ
@@ -32,6 +36,7 @@ const TestResolvers = {
 
 const resolvers = merge(
     UsersResolvers,
+    UserResolvers,
     TestResolvers
 );
 

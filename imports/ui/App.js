@@ -13,6 +13,9 @@ import LogoutButton from './Authenticate/logoutButton'
 
 const getUser = gql`
   query getUser{
+    user{
+      _id
+    }
     hi
     users {
       _id
@@ -32,18 +35,25 @@ const App = () => {
       <h1>{ data.hi }</h1>
 
       {/*Authenticate*/}
-      <LogoutButton client={client} />
-      <RegisterForm client={client} />
-      <LoginForm client={client} />
+      { data.user._id ? (
+        <div>
+          <LogoutButton client={client} />
 
-      <ul>
-        { data.users.map(user => (
-          <li key={ user._id }>{ user.name }</li>
-        )) }
-      </ul>
+          <ul>
+            { data.users.map(user => (
+              <li key={ user._id }>{ user.name }</li>
+            )) }
+          </ul>
 
-      {/*Users*/}
-      <UserCreateForm />
+          {/*Users*/}
+          <UserCreateForm />
+        </div>
+      ) : (
+        <div>
+          <RegisterForm client={client} />
+          <LoginForm client={client} />
+        </div>
+      )  }
     </div>
   )
 }

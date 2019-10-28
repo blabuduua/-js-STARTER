@@ -9,7 +9,7 @@ const LogoutButton = (props) => {
         props.client.resetStore();
       }
 
-      console.log(err);
+      console.log(error);
     });
   }
 

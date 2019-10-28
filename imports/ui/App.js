@@ -7,6 +7,7 @@ import { Accounts } from 'meteor/accounts-base'
 import UserCreateForm from './Users/userCreateForm'
 
 // Authenticate
+import LoginForm from './Authenticate/loginForm'
 import RegisterForm from './Authenticate/registerForm'
 
 const getUser = gql`
@@ -35,7 +36,10 @@ const App = () => {
           <li key={ user._id }>{ user.name }</li>
         )) }
       </ul>
+      // Users
       <UserCreateForm />
+      // Authenticate
+      <LoginForm />
       <RegisterForm />
     </div>
   )

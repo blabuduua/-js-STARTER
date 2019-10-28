@@ -4,6 +4,7 @@ import { gql } from "apollo-boost"
 
 const getUser = gql`
   {
+    hi
     users {
       _id
       name
@@ -19,9 +20,12 @@ const App = () => {
 
   return (
     <div>
-      { data.users.map(user => (
-        <h1>{ user.name }</h1>
-      )) }
+      <h1>{ data.hi }</h1>
+      <ul>
+        { data.users.map(user => (
+          <li key={ user._id }>{ user.name }</li>
+        )) }
+      </ul>
     </div>
   )
 }

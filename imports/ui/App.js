@@ -9,6 +9,7 @@ import UserCreateForm from './Users/userCreateForm'
 // Authenticate
 import LoginForm from './Authenticate/loginForm'
 import RegisterForm from './Authenticate/registerForm'
+import LogoutButton from './Authenticate/logoutButton'
 
 const getUser = gql`
   query getUser{
@@ -29,17 +30,20 @@ const App = () => {
   return (
     <div>
       <h1>{ data.hi }</h1>
+
+      {/*Authenticate*/}
+      <LogoutButton client={client} />
+      <RegisterForm client={client} />
+      <LoginForm client={client} />
+
       <ul>
         { data.users.map(user => (
           <li key={ user._id }>{ user.name }</li>
         )) }
       </ul>
-      // Users
+
+      {/*Users*/}
       <UserCreateForm />
-      // Authenticate
-      <LoginForm />
-      <RegisterForm />
-      <button onClick={ () =>  Meteor.logout() }>Logout</button>
     </div>
   )
 }

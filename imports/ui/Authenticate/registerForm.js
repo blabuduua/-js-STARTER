@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
   let email
   let password
 
@@ -10,7 +10,13 @@ const RegisterForm = () => {
     Accounts.createUser({
       email: email.value,
       password: password.value
-    }, error => { console.log('Success register', error) })
+    }, error => {
+      if(!error) {
+        props.client.resetStore()
+      }
+      
+      console.log('Success register', error)
+     })
 
     email.value = ''
     password.value = ''

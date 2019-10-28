@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   let email
   let password
 
@@ -10,7 +10,13 @@ const LoginForm = () => {
     Meteor.loginWithPassword(
       email.value,
       password.value,
-      error => { console.log('Success login', error) }
+      error => {
+        if(!error) {
+          props.client.resetStore()
+        }
+        
+        console.log('Success login', error)
+       }
     )
 
     email.value = ''

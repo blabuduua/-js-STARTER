@@ -2,6 +2,7 @@ import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { Accounts } from 'meteor/accounts-base'
+import { Link } from "react-router-dom";
 
 // Users
 import UserCreateForm from './Users/userCreateForm'
@@ -33,6 +34,8 @@ const App = () => {
   return (
     <div>
       <h1>{ data.hi }</h1>
+      
+      <Link to="/test">Test</Link>
 
       {/*Authenticate*/}
       { data.user._id ? (

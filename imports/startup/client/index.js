@@ -9,9 +9,11 @@ import { ApolloLink, split } from "apollo-link"
 import { InMemoryCache } from "apollo-cache-inmemory"
 import { ApolloProvider } from '@apollo/react-hooks'
 import { getMainDefinition } from "apollo-utilities"
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"
 
 // КОМПОНЕНТЫ (Виды)
 import App from '../../ui/App'
+import Test from '../../ui/Test/Test'
 
 // Конфиг ссылок
 const httpLink = new HttpLink();
@@ -47,12 +49,25 @@ const apolloClient = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
-const ApolloApp = () => (
-    <ApolloProvider client={apolloClient}>
-        <App />
-    </ApolloProvider>
-);
+function PrivateRoute ({component: Component, authed, ...rest}) {
+  return (
+    <Route
+      {...rest}
+      render={(props) => authed === true
+        ? <Component {...props} />
+        : <Redirect to={{pathname: '/', state: {from: props.location}}} />}
+    />
+  )
+}
 
 Meteor.startup(() => {
-  render(<ApolloApp />, document.getElementById('app'))
+  render(
+    <ApolloProvider client={apolloClient}>
+      <BrowserRouter>
+        <Switch>
+            <Route path="/" exact component={ App }/>
+            <PrivateRoute authed={true} path='/test' component={Test} />
+        </Switch>
+      </BrowserRouter>
+    </ApolloProvider>, document.getElementById('app'));
 })

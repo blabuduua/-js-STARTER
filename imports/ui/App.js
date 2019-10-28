@@ -3,7 +3,11 @@ import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { Accounts } from 'meteor/accounts-base'
 
+// Users
 import UserCreateForm from './Users/userCreateForm'
+
+// Authenticate
+import RegisterForm from './Authenticate/registerForm'
 
 const getUser = gql`
   query getUser{
@@ -31,7 +35,8 @@ const App = () => {
           <li key={ user._id }>{ user.name }</li>
         )) }
       </ul>
-      <UserCreateForm refetch={ data.refetch } />
+      <UserCreateForm />
+      <RegisterForm />
     </div>
   )
 }

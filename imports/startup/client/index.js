@@ -42,16 +42,13 @@ const link = split(
     wsLink,
     httpLinkAuth,
 );
-
-// Инициализация Клиента
-const client = new ApolloClient({
+const apolloClient = new ApolloClient({
     link,
     cache: new InMemoryCache(),
 });
 
-// Обёртка пролижения
 const ApolloApp = () => (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={apolloClient}>
         <App />
     </ApolloProvider>
 );

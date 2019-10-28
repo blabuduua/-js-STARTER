@@ -20,8 +20,6 @@ const getUser = gql`
   }
 `;
 
-console.log(Accounts);
-
 const App = () => {
   const { loading, error, data, client } = useQuery(getUser);
 

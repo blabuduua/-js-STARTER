@@ -1,6 +1,7 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import { gql } from "apollo-boost"
+import { gql } from 'apollo-boost'
+import { Accounts } from 'meteor/accounts-base'
 
 import UserCreateForm from './Users/userCreateForm'
 
@@ -13,6 +14,8 @@ const getUser = gql`
     }
   }
 `;
+
+console.log(Accounts);
 
 const App = () => {
   const { loading, error, data, client } = useQuery(getUser);

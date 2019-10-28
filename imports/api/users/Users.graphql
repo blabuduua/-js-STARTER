@@ -2,3 +2,7 @@ type Users {
   _id: String
   name: String
 }
+
+type Mutation {
+  createUser: Users
+}

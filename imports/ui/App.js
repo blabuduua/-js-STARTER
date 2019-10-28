@@ -2,6 +2,8 @@ import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from "apollo-boost"
 
+import UserCreateForm from './Users/userCreateForm'
+
 const getUser = gql`
   {
     hi
@@ -26,6 +28,7 @@ const App = () => {
           <li key={ user._id }>{ user.name }</li>
         )) }
       </ul>
+      <UserCreateForm />
     </div>
   )
 }

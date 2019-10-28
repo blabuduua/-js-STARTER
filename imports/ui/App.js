@@ -5,7 +5,7 @@ import { gql } from "apollo-boost"
 import UserCreateForm from './Users/userCreateForm'
 
 const getUser = gql`
-  {
+  query getUser{
     hi
     users {
       _id
@@ -28,7 +28,7 @@ const App = () => {
           <li key={ user._id }>{ user.name }</li>
         )) }
       </ul>
-      <UserCreateForm />
+      <UserCreateForm refetch={ data.refetch } />
     </div>
   )
 }

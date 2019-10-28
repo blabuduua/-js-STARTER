@@ -8,10 +8,9 @@ export default {
   },
 
   Mutation: {
-    createUser() {
-      // const userId = Users.insert({
-      //   name: 'Test MATRIX'
-      // })
+    createUser(obj, { name }, context) {
+      const userId = Users.insert({ name })
+      return Users.findOne(userId)
     }
   }
 }

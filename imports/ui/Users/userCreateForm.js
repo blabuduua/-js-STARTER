@@ -1,39 +1,47 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { gql } from "apollo-boost"
 
-class UserCreateForm extends React.Component {
-  constructor(props){
-    super(props);
+const createUser = gql`
+  mutation createUser($name: String!) {
+    createUser(name: $name) {
+      _id
+    }
+  }
+`
 
-    this.state = {
-      name : "",
-      error : ""
-     };
+const UserCreateForm = () => {
+  let name;
+  const [createUserFunction] = useMutation(createUser);
+
+  handleAddUser = (e) => {
+    e.preventDefault();
+    name.value == '' ? console.log('Empty Name') : saveUser()
+    name.value = ''
   }
 
-  submitForm = () => {
-    let name = this.state.name.value
-
-    name === '' ?
-      this.setState({error: 'Error!'}) :
-      this.setState({error: 'Succes!'})
-
-    console.log(name);
-
-    // Чистим ввод
-    this.state.name.value = ''
+  saveUser = () => {
+    createUserFunction({
+      refetchQueries: [
+          "getUser"
+      ],
+      variables: {
+          name: name.value
+      }
+    }).then(({ data }) => {
+      console.log('data', data);
+    }).catch(error => {
+      console.log('error', error);
+         // Unauthorized error.message for form validation and API control
+    });
   }
 
-  render() {
-    return (
-      <div>
-        <input type="text" ref={ (input) => this.state.name = input } />
-        { this.state.error }
-        <button onClick={ this.submitForm }>Submit</button>
-      </div>
-    )
-  }
+  return (
+    <form onSubmit={ handleAddUser }>
+      <input type="text" ref={ (input) => name = input } />
+      <button>Submit</button>
+    </form>
+  )
 }
 
 export default UserCreateForm

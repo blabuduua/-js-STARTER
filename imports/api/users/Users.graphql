@@ -4,5 +4,5 @@ type Users {
 }
 
 type Mutation {
-  createUser: Users
+  createUser(name: String!): Users
 }

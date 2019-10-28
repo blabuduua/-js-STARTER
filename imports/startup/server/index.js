@@ -6,7 +6,7 @@ import merge from 'lodash/merge'
 import UsersSchema from '../../api/users/Users.graphql'
 import UsersResolvers from '../../api/users/resolvers'
 
-// Update
+// Update 1
 
 // СХЕМЫ (Миграции)
 const TestsSchema = `

@@ -4,10 +4,6 @@ import { gql } from 'apollo-boost'
 import { Accounts } from 'meteor/accounts-base'
 import { Link } from "react-router-dom"
 
-import { Waypoint } from "react-waypoint"
-
-import { List, ListItem, Paper } from '@material-ui/core'
-
 // Users
 import UserCreateForm from './Users/userCreateForm'
 
@@ -36,8 +32,7 @@ const App = () => {
   if (error) return <span>Error :(</span>;
 
   return (
-    <div style={{ maxWidth: 1200, margin: 'auto', padding: 10 }}>
-      <Paper>
+    <div className="container">
         <h1>{ data.hi }</h1>
 
         <Link to="/test">Test</Link>
@@ -47,16 +42,9 @@ const App = () => {
           <div>
             <LogoutButton client={client} />
 
-            <List>
-              { data.users.map((user, i) => (
-                <React.Fragment key={ user._id }>
-                  <ListItem >{ user.name }</ListItem>
-                  { i === data.users.length - 10 && (
-                    <Waypoint onEnter={ () =>  console.log(i) } />
-                  )}
-                </React.Fragment>
-              )) }
-            </List>
+            { data.users.map((user, i) => (
+                <li key={ user._id }>{ user.name }</li>
+            )) }
 
             {/*Users*/}
             <UserCreateForm />
@@ -67,7 +55,6 @@ const App = () => {
             <LoginForm client={client} />
           </div>
         )  }
-      </Paper>
     </div>
   )
 }

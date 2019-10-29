@@ -38,8 +38,10 @@ const UserCreateForm = () => {
 
   return (
     <form onSubmit={ handleAddUser }>
-      <input type="text" ref={ (input) => name = input } />
-      <button>Submit</button>
+      <div className="col-md-4">
+        <input placeholder="Название" className="form-control" type="text" ref={ (input) => name = input } />
+      </div>
+      <button className="btn btn-outline-primary">Submit</button>
     </form>
   )
 }

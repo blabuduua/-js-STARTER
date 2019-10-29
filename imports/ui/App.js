@@ -42,9 +42,11 @@ const App = () => {
           <div>
             <LogoutButton client={client} />
 
-            { data.users.map((user, i) => (
-                <li key={ user._id }>{ user.name }</li>
-            )) }
+            <ul className="list-unstyled">
+              { data.users.map((user, i) => (
+                  <li key={ user._id }>{ user.name }</li>
+              )) }
+            </ul>
 
             {/*Users*/}
             <UserCreateForm />

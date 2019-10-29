@@ -14,7 +14,7 @@ const RegisterForm = (props) => {
       if(!error) {
         props.client.resetStore()
       }
-      
+
       console.log('Success register', error)
      })
 
@@ -24,9 +24,15 @@ const RegisterForm = (props) => {
 
   return (
     <form onSubmit={ handleRegisterUser }>
-      <input type="email" name="email" ref={(input) => email = input} />
-      <input type="password" name="password" ref={(input) => password = input} />
-      <button>Register Me!</button>
+      <div className="col-md-4">
+        <input placeholder="Email" className="form-control" type="email" name="email" ref={(input) => email = input} />
+      </div>
+      <div className="col-md-4">
+        <input placeholder="Password" className="form-control" type="password" name="password" ref={(input) => password = input} />
+      </div>
+      <div className="col-md-4">
+        <button className="btn btn-outline-primary">Register Me!</button>
+      </div>
     </form>
   )
 }

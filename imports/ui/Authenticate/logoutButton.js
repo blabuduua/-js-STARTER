@@ -14,7 +14,7 @@ const LogoutButton = (props) => {
   }
 
   return (
-    <button onClick={ handleLogoutUser }>Logout Me!</button>
+    <button className="btn btn-outline-primary" onClick={ handleLogoutUser }>Logout Me!</button>
   )
 }
 

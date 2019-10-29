@@ -2,7 +2,9 @@ import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import { Accounts } from 'meteor/accounts-base'
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+
+import { Waypoint } from "react-waypoint"
 
 import { List, ListItem, Paper } from '@material-ui/core'
 
@@ -46,8 +48,13 @@ const App = () => {
             <LogoutButton client={client} />
 
             <List>
-              { data.users.map(user => (
-                <ListItem key={ user._id }>{ user.name }</ListItem>
+              { data.users.map((user, i) => (
+                <React.Fragment key={ user._id }>
+                  <ListItem >{ user.name }</ListItem>
+                  { i === data.users.length - 10 && (
+                    <Waypoint onEnter={ () =>  console.log(i) } />
+                  )}
+                </React.Fragment>
               )) }
             </List>
 

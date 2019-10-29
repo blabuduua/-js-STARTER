@@ -34,7 +34,7 @@ const App = () => {
   return (
     <div>
       <h1>{ data.hi }</h1>
-      
+
       <Link to="/test">Test</Link>
 
       {/*Authenticate*/}

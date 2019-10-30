@@ -4,25 +4,41 @@ import DataTable from 'react-data-table-component'
 
 state = { toggledClearRows: false }
 
-const data = [
-  { id: 1, title: 'Conan the Barbarian', year: '1982' },
-  { id: 2, title: 'Conan the Barbarian', year: '1983' },
-  { id: 3, title: 'Conan the Barbarian', year: '1984' },
-  { id: 4, title: 'Conan the Barbarian', year: '1985' },
-  { id: 5, title: 'Conan the Barbarian', year: '1986' },
-  { id: 6, title: 'Conan the Barbarian', year: '1982' },
-  { id: 7, title: 'Conan the Barbarian', year: '1987' },
-  { id: 8, title: 'Conan the Barbarian', year: '1988' },
-  { id: 9, title: 'Conan the Barbarian', year: '1982' },
-  { id: 10, title: 'Conan the Barbarian', year: '1985' },
-  { id: 11, title: 'Conan the Barbarian', year: '1984' }
-];
+// const data = [
+//   { id: 1, title: 'Conan the Barbarian', year: '1982' },
+//   { id: 2, title: 'Conan the Barbarian', year: '1983' },
+//   { id: 3, title: 'Conan the Barbarian', year: '1984' },
+//   { id: 4, title: 'Conan the Barbarian', year: '1985' },
+//   { id: 5, title: 'Conan the Barbarian', year: '1986' },
+//   { id: 6, title: 'Conan the Barbarian', year: '1982' },
+//   { id: 7, title: 'Conan the Barbarian', year: '1987' },
+//   { id: 8, title: 'Conan the Barbarian', year: '1988' },
+//   { id: 9, title: 'Conan the Barbarian', year: '1982' },
+//   { id: 10, title: 'Conan the Barbarian', year: '1985' },
+//   { id: 11, title: 'Conan the Barbarian', year: '1984' }
+// ];
+
+const data = [{ id: 1, title: 'Conan the Barbarian', summary: 'Orphaned boy Conan is enslaved after his village is destroyed...',  year: '1982' }];
+
+// const columns = [
+//   {
+//     name: 'Title',
+//     selector: 'title',
+//     sortable: true,
+//   },
+//   {
+//     name: 'Year',
+//     selector: 'year',
+//     sortable: true,
+//     right: true,
+//   },
+// ];
 
 const columns = [
   {
     name: 'Title',
-    selector: 'title',
     sortable: true,
+    cell: row => <div><button>123</button><div style={{ fontWeight: 'bold' }}>{row.title}</div>{row.summary}</div>,
   },
   {
     name: 'Year',
@@ -52,9 +68,8 @@ class Test extends Component  {
           title="Arnold Movies"
           columns={columns}
           data={data}
-          selectableRows // add for checkbox selection
+          selectableRows
           onRowSelected={handleChange}
-          clearSelectedRows={state.toggledClearRows}
         />
       </div>
     )
